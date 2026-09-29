@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI MediCare | Symptom Scan</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; }
+        body { background-color: #050914; min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow-x: hidden; color: white; padding: 40px 20px; }
+        .orb { position: fixed; border-radius: 50%; filter: blur(120px); opacity: 0.5; animation: floatOrb 15s infinite alternate ease-in-out; z-index: 0; }
+        .orb-1 { width: 500px; height: 500px; background: #00f2fe; top: -15%; left: -5%; }
+        .orb-2 { width: 600px; height: 600px; background: #4facfe; bottom: -20%; right: -10%; animation-delay: -5s; }
+        @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(60px, 60px) scale(1.2); } }
+        
+        .container { position: relative; z-index: 10; background: rgba(10, 15, 30, 0.6); backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.1); border-top: 2px solid #00f2fe; padding: 40px; width: 100%; max-width: 600px; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes slideIn { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
+        
+        h2 { text-align: center; font-size: 24px; margin-bottom: 5px; text-shadow: 0 0 10px rgba(0,242,254,0.5); }
+        .subtitle { text-align: center; color: #8fa0b5; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px; }
+        
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; color: #00f2fe; font-size: 13px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+        .input-group input, .input-group textarea { width: 100%; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 8px; outline: none; transition: 0.3s; font-size: 15px; }
+        .input-group input:focus, .input-group textarea:focus { border-color: #00f2fe; box-shadow: 0 0 15px rgba(0,242,254,0.3); background: rgba(255,255,255,0.08); }
+        
+        button { width: 100%; padding: 15px; background: transparent; border: 2px solid #00f2fe; color: #00f2fe; font-size: 16px; font-weight: 700; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.4s; position: relative; overflow: hidden; z-index: 1; margin-top: 10px; }
+        button::before { content: ''; position: absolute; top: 0; left: 0; width: 0%; height: 100%; background: linear-gradient(90deg, #00f2fe, #4facfe); transition: 0.4s ease; z-index: -1; }
+        button:hover::before { width: 100%; }
+        button:hover { color: #050914; box-shadow: 0 0 20px rgba(0, 242, 254, 0.6); transform: translateY(-2px); }
+        
+        .result-box { margin-top: 30px; padding: 20px; background: rgba(46, 213, 115, 0.1); border: 1px solid #2ed573; border-radius: 12px; text-align: center; animation: pulseGlow 2s infinite; }
+        @keyframes pulseGlow { 0% { box-shadow: 0 0 5px rgba(46, 213, 115, 0.2); } 50% { box-shadow: 0 0 20px rgba(46, 213, 115, 0.5); } 100% { box-shadow: 0 0 5px rgba(46, 213, 115, 0.2); } }
+        .result-box h3 { color: #2ed573; margin-bottom: 10px; font-size: 22px; }
+        .result-box p { color: #d1d8e0; font-size: 14px; margin-bottom: 5px; }
+        .result-box span { color: white; font-weight: bold; }
+        
+        .back-link { display: block; text-align: center; margin-top: 25px; color: #8fa0b5; text-decoration: none; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .back-link:hover { color: #00f2fe; text-shadow: 0 0 10px rgba(0,242,254,0.5); }
+    </style>
+</head>
+<body>
+    <div class="orb orb-1"></div><div class="orb orb-2"></div>
+    <div class="container">
+        <h2>AI Symptom Scan</h2>
+        <p class="subtitle">Neural Diagnostic System</p>
+        
+        <form method="POST">
+            <div class="input-group">
+                <label>Patient Name</label>
+                <input type="text" name="name" required autocomplete="off">
+            </div>
+            <div class="input-group">
+                <label>Patient Age</label>
+                <input type="number" name="age" required>
+            </div>
+            <div class="input-group">
+                <label>Observed Symptoms</label>
+                <textarea name="symptoms" rows="4" placeholder="E.g., Severe headache and continuous fever..." required></textarea>
+            </div>
+            <button type="submit">Initialize Scan</button>
+        </form>
+
+        {% if result %}
+        <div class="result-box">
+            <h3>⚠ AI Prediction: {{ result.disease }}</h3>
+            <p>Patient: <span>{{ result.name }} ({{ result.age }} Yrs)</span></p>
+            <p>Recommended Lab Test: <span style="color:#00f2fe;">{{ result.test }}</span></p>
+            <p>Required Specialist: <span style="color:#00f2fe;">{{ result.doctor }}</span></p>
+        </div>
+        {% endif %}
+
+        <a href="/dashboard" class="back-link">← Return to Command Center</a>
+    </div>
+</body>
+</html>

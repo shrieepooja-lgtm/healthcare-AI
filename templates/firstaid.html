@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI MediCare | Emergency Protocols</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; }
+        body { background-color: #050914; min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow-x: hidden; color: white; padding: 40px 20px; }
+        
+        /* Crimson Red Theme for Emergency */
+        .orb { position: fixed; border-radius: 50%; filter: blur(120px); opacity: 0.3; animation: floatOrb 15s infinite alternate ease-in-out; z-index: 0; }
+        .orb-1 { width: 500px; height: 500px; background: #ff4757; top: -15%; left: -5%; }
+        .orb-2 { width: 600px; height: 600px; background: #ff6b81; bottom: -20%; right: -10%; animation-delay: -5s; }
+        @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(60px, 60px) scale(1.2); } }
+        
+        .container { position: relative; z-index: 10; background: rgba(10, 15, 30, 0.6); backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.1); border-top: 2px solid #ff4757; padding: 40px; width: 100%; max-width: 1100px; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes slideIn { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
+        
+        h2 { text-align: center; font-size: 28px; margin-bottom: 5px; color: #ff4757; text-shadow: 0 0 15px rgba(255, 71, 87, 0.5); font-weight: 700; letter-spacing: 1px; }
+        .subtitle { text-align: center; color: #8fa0b5; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 40px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-bottom: 30px; }
+        
+        .card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-left: 4px solid #ff4757; border-radius: 12px; padding: 25px; transition: 0.3s; position: relative; overflow: hidden; }
+        .card:hover { transform: translateY(-5px); background: rgba(255, 71, 87, 0.05); border-color: rgba(255, 71, 87, 0.3); box-shadow: 0 15px 30px rgba(255, 71, 87, 0.15); }
+        
+        .card h3 { color: white; font-size: 18px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;}
+        .card ul { list-style: none; padding-left: 0; }
+        .card ul li { color: #d1d8e0; font-size: 13.5px; margin-bottom: 10px; line-height: 1.5; position: relative; padding-left: 20px; }
+        .card ul li::before { content: '▸'; position: absolute; left: 0; color: #ff4757; font-weight: bold; }
+        
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #8fa0b5; text-decoration: none; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .back-link:hover { color: #ff4757; text-shadow: 0 0 10px rgba(255, 71, 87, 0.5); }
+    </style>
+</head>
+<body>
+    <div class="orb orb-1"></div><div class="orb orb-2"></div>
+    <div class="container">
+        <h2>Emergency Protocols</h2>
+        <p class="subtitle">Comprehensive Immediate Action Guidelines</p>
+        
+        <div class="grid">
+            <!-- 1. Heart Attack -->
+            <div class="card">
+                <h3>🫀 Heart Attack (Cardiac Arrest)</h3>
+                <ul>
+                    <li>Call emergency services immediately.</li>
+                    <li>If the person is unconscious, begin CPR (Push hard and fast in the center of the chest).</li>
+                    <li>Loosen any tight clothing.</li>
+                    <li>If trained, use an AED (Automated External Defibrillator) if available.</li>
+                </ul>
+            </div>
+
+            <!-- 2. Severe Burns -->
+            <div class="card">
+                <h3>🔥 Severe Burns</h3>
+                <ul>
+                    <li>Cool the burn under cold running water for at least 10 minutes.</li>
+                    <li>Do NOT apply ice, butter, or ointments immediately.</li>
+                    <li>Cover the burn loosely with a sterile, non-fluffy dressing or cling film.</li>
+                    <li>Seek medical help if the burn is large or deep.</li>
+                </ul>
+            </div>
+
+            <!-- 3. Severe Bleeding -->
+            <div class="card">
+                <h3>🩸 Severe Bleeding</h3>
+                <ul>
+                    <li>Apply direct pressure to the wound using a clean cloth or bandage.</li>
+                    <li>Maintain pressure until bleeding stops.</li>
+                    <li>Elevate the injured area above the heart if possible.</li>
+                    <li>Do not remove the cloth; if it soaks through, add another layer on top.</li>
+                </ul>
+            </div>
+
+            <!-- 4. Choking -->
+            <div class="card">
+                <h3>😵 Choking (Adult)</h3>
+                <ul>
+                    <li>Stand behind the person and wrap your arms around their waist.</li>
+                    <li>Give 5 sharp back blows between the shoulder blades.</li>
+                    <li>If unsuccessful, perform 5 abdominal thrusts (Heimlich maneuver).</li>
+                    <li>Alternate until the blockage is dislodged.</li>
+                </ul>
+            </div>
+
+            <!-- 5. Snake Bite -->
+            <div class="card">
+                <h3>🐍 Snake Bite</h3>
+                <ul>
+                    <li>Keep the patient calm and completely still to slow venom spread.</li>
+                    <li>Keep the bitten limb at or slightly below heart level.</li>
+                    <li>Do NOT cut the wound, suck out venom, or apply a tight tourniquet.</li>
+                    <li>Rush to the nearest hospital for anti-venom immediately.</li>
+                </ul>
+            </div>
+
+            <!-- 6. Electric Shock -->
+            <div class="card">
+                <h3>⚡ Electric Shock</h3>
+                <ul>
+                    <li>Do NOT touch the person if they are still in contact with the source.</li>
+                    <li>Turn off the main power supply immediately if possible.</li>
+                    <li>If you cannot turn it off, use a dry non-conducting object (like wood) to push them away.</li>
+                    <li>Check for breathing and start CPR if necessary.</li>
+                </ul>
+            </div>
+
+            <!-- 7. Seizures / Epilepsy -->
+            <div class="card">
+                <h3>🧠 Seizures (Epilepsy)</h3>
+                <ul>
+                    <li>Clear the area of hard or sharp objects to prevent injury.</li>
+                    <li>Cushion their head with a soft jacket or pillow.</li>
+                    <li>Do NOT hold them down or put anything in their mouth.</li>
+                    <li>Once the seizure stops, roll them onto their side (recovery position).</li>
+                </ul>
+            </div>
+
+            <!-- 8. Bone Fracture -->
+            <div class="card">
+                <h3>🦴 Bone Fractures</h3>
+                <ul>
+                    <li>Do not try to realign the bone or push a bone that's sticking out back in.</li>
+                    <li>Immobilize the injured area using a splint or sling if possible.</li>
+                    <li>Apply an ice pack wrapped in cloth to reduce swelling.</li>
+                    <li>Keep the patient still and seek immediate medical attention.</li>
+                </ul>
+            </div>
+
+            <!-- 9. Heatstroke -->
+            <div class="card">
+                <h3>☀️ Heatstroke</h3>
+                <ul>
+                    <li>Move the person to a cool, shaded, or air-conditioned place.</li>
+                    <li>Remove excess clothing and cool them down with damp cloths or cool water.</li>
+                    <li>Fan the person vigorously to lower body temperature.</li>
+                    <li>If conscious, give them cool water to sip slowly.</li>
+                </ul>
+            </div>
+
+            <!-- 10. Stroke -->
+            <div class="card">
+                <h3>⚠️ Stroke (F.A.S.T. Method)</h3>
+                <ul>
+                    <li><strong>Face:</strong> Ask them to smile. Does one side of the face droop?</li>
+                    <li><strong>Arms:</strong> Ask them to raise both arms. Does one arm drift downward?</li>
+                    <li><strong>Speech:</strong> Ask them to repeat a simple phrase. Is their speech slurred?</li>
+                    <li><strong>Time:</strong> If you observe any of these signs, call emergency immediately.</li>
+                </ul>
+            </div>
+
+            <!-- 11. Asthma Attack -->
+            <div class="card">
+                <h3>🫁 Asthma Attack</h3>
+                <ul>
+                    <li>Sit the person upright comfortably and keep them calm.</li>
+                    <li>Help them use their reliever inhaler (usually blue) - 1 puff every 30-60 seconds (up to 10 puffs).</li>
+                    <li>If symptoms don't improve after 10 puffs, call an ambulance.</li>
+                    <li>Do not lay them down flat.</li>
+                </ul>
+            </div>
+
+            <!-- 12. Poisoning -->
+            <div class="card">
+                <h3>🧪 Poisoning</h3>
+                <ul>
+                    <li>Identify what the person swallowed, inhaled, or was exposed to.</li>
+                    <li>Call emergency or poison control immediately.</li>
+                    <li>Do NOT force the person to vomit unless instructed by a medical professional.</li>
+                    <li>If unconscious but breathing, place them in the recovery position.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <a href="/dashboard" class="back-link">← Return to Command Center</a>
+    </div>
+</body>
+</html>

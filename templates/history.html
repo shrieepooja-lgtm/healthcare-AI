@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI MediCare | Database</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; }
+        body { background-color: #050914; min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow-x: hidden; color: white; padding: 40px 20px; }
+        
+        /* Emerald Green Theme for Database */
+        .orb { position: fixed; border-radius: 50%; filter: blur(120px); opacity: 0.4; animation: floatOrb 15s infinite alternate ease-in-out; z-index: 0; }
+        .orb-1 { width: 500px; height: 500px; background: #10ac84; top: -15%; left: -5%; }
+        .orb-2 { width: 600px; height: 600px; background: #1dd1a1; bottom: -20%; right: -10%; animation-delay: -5s; }
+        @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(60px, 60px) scale(1.2); } }
+        
+        .container { position: relative; z-index: 10; background: rgba(10, 15, 30, 0.6); backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.1); border-top: 2px solid #1dd1a1; padding: 40px; width: 100%; max-width: 1000px; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes slideIn { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
+        
+        h2 { text-align: center; font-size: 26px; margin-bottom: 5px; text-shadow: 0 0 10px rgba(29, 209, 161, 0.5); }
+        .subtitle { text-align: center; color: #8fa0b5; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px; }
+        
+        /* Modern Glass Table */
+        .table-wrapper { overflow-x: auto; margin-bottom: 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th, td { padding: 18px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        th { background: rgba(29, 209, 161, 0.1); color: #1dd1a1; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; }
+        td { color: #c8d6e5; font-size: 14px; transition: 0.3s; }
+        tr:hover td { background: rgba(29, 209, 161, 0.05); color: white; }
+        
+        .badge { background: rgba(29, 209, 161, 0.2); color: #1dd1a1; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: bold; text-transform: uppercase; border: 1px solid rgba(29, 209, 161, 0.3); }
+        .disease-text { color: #ff6b6b; font-weight: bold; text-shadow: 0 0 8px rgba(255, 107, 107, 0.3); }
+
+        .back-link { display: block; text-align: center; color: #8fa0b5; text-decoration: none; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .back-link:hover { color: #1dd1a1; text-shadow: 0 0 10px rgba(29, 209, 161, 0.5); }
+    </style>
+</head>
+<body>
+    <div class="orb orb-1"></div><div class="orb orb-2"></div>
+    <div class="container">
+        <h2>Patient Database</h2>
+        <p class="subtitle">Encrypted Medical Logs</p>
+        
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Patient Info</th>
+                        <th>Scan Type</th>
+                        <th>AI Diagnosis</th>
+                        <th>Recommendation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in records %}
+                    <tr>
+                        <td>{{ row[6] }}</td>
+                        <td><strong>{{ row[1] }}</strong><br><span style="font-size: 11px; color: #8fa0b5;">Age: {{ row[2] }}</span></td>
+                        <td><span class="badge">{{ row[3] }}</span></td>
+                        <td class="disease-text">{{ row[4] }}</td>
+                        <td style="color: #48dbfb;">{{ row[5] }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 40px; color: #8fa0b5;">No patient records found in the database.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <a href="/dashboard" class="back-link">← Return to Command Center</a>
+    </div>
+</body>
+</html>

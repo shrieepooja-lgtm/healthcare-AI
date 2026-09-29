@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI MediCare | Secure Portal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; }
+
+        body {
+            background-color: #050914; /* Deep Tech Black */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            color: white;
+        }
+
+        /* Animated Glowing Background Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.6;
+            animation: floatOrb 12s infinite alternate ease-in-out;
+            z-index: 0;
+        }
+        .orb-1 { width: 400px; height: 400px; background: #00f2fe; top: -10%; left: 10%; }
+        .orb-2 { width: 500px; height: 500px; background: #4facfe; bottom: -20%; right: 5%; animation-delay: -5s; }
+        .orb-3 { width: 300px; height: 300px; background: #0066ff; top: 40%; left: 40%; animation-delay: -2s; opacity: 0.4; }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.2); }
+        }
+
+        /* Main Login Container */
+        .login-container {
+            position: relative;
+            z-index: 10;
+            background: rgba(10, 15, 30, 0.6);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(0, 242, 254, 0.5); /* Neon top edge */
+            border-bottom: 1px solid rgba(0, 242, 254, 0.5);
+            padding: 50px 40px;
+            width: 420px;
+            border-radius: 24px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 20px rgba(0, 242, 254, 0.05);
+            text-align: center;
+            animation: slideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateY(60px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Pulsing Logo */
+        .logo-circle {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        .logo-circle span { font-size: 30px; font-weight: bold; color: #fff; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(0, 242, 254, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 242, 254, 0); }
+        }
+
+        h2 { font-size: 26px; font-weight: 700; letter-spacing: 1px; margin-bottom: 5px; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+        .subtitle { font-size: 13px; color: #8fa0b5; margin-bottom: 35px; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* Modern Floating Input Fields */
+        .input-group { position: relative; margin-bottom: 35px; text-align: left; }
+        
+        .input-group input {
+            width: 100%;
+            padding: 10px 5px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group label {
+            position: absolute;
+            top: 10px;
+            left: 5px;
+            color: #8fa0b5;
+            font-size: 16px;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+
+        .input-group input:focus ~ label,
+        .input-group input:valid ~ label {
+            top: -20px;
+            font-size: 12px;
+            color: #00f2fe;
+            font-weight: bold;
+        }
+
+        .input-group input:focus { border-bottom: 2px solid #00f2fe; box-shadow: 0 5px 5px -5px rgba(0, 242, 254, 0.5); }
+
+        /* Cyberpunk Glow Button */
+        button {
+            width: 100%;
+            padding: 16px;
+            background: transparent;
+            border: 2px solid #00f2fe;
+            color: #00f2fe;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0%; height: 100%;
+            background: linear-gradient(90deg, #00f2fe, #4facfe);
+            transition: 0.4s ease;
+            z-index: -1;
+        }
+
+        button:hover::before { width: 100%; }
+        button:hover { color: #050914; box-shadow: 0 0 25px rgba(0, 242, 254, 0.6); transform: translateY(-2px); }
+
+        #msg { margin-top: 25px; font-size: 14px; color: #ff4757; font-weight: 500; height: 20px;}
+        .success-msg { color: #2ed573 !important; text-shadow: 0 0 10px rgba(46, 213, 115, 0.4); }
+
+        /* OTP Section Hidden by Default */
+        #otp-section { display: none; }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Glowing Background Elements -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="login-container">
+        <div class="logo-circle">
+            <span>AI</span>
+        </div>
+        <h2>AI MediCare</h2>
+        
+        <!-- Email Section -->
+        <div id="email-section">
+            <p class="subtitle">Neural Network Access</p>
+            
+            <div class="input-group">
+                <input type="email" id="email" required>
+                <label>Authorized Email Address</label>
+            </div>
+            
+            <button onclick="requestOTP()" id="req-btn">Initialize Connection</button>
+        </div>
+
+        <!-- OTP Section -->
+        <div id="otp-section">
+            <p class="subtitle" style="color: #2ed573;">Connection Secured. OTP Dispatched.</p>
+            
+            <div class="input-group">
+                <input type="number" id="otp" required>
+                <label>Enter Security Code</label>
+            </div>
+            
+            <button onclick="verifyOTP()">Decrypt & Login</button>
+        </div>
+
+        <p id="msg"></p>
+    </div>
+
+    <script>
+        function requestOTP() {
+            let email = document.getElementById('email').value;
+            let btn = document.getElementById('req-btn');
+            let msgBox = document.getElementById('msg');
+            
+            if(!email) { msgBox.innerText = "⚠ Email protocol missing!"; return; }
+            
+            btn.innerText = "Encrypting Data...";
+            btn.disabled = true;
+
+            fetch('/send_otp', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({email: email})
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    document.getElementById('email-section').style.display = "none";
+                    let otpSec = document.getElementById('otp-section');
+                    otpSec.style.display = "block";
+                    otpSec.style.animation = "slideIn 0.8s ease forwards";
+                    msgBox.innerText = "";
+                } else {
+                    msgBox.innerText = "❌ Connection Failed. Check Email.";
+                    btn.innerText = "Initialize Connection";
+                    btn.disabled = false;
+                }
+            });
+        }
+
+        function verifyOTP() {
+            let otp = document.getElementById('otp').value;
+            let msgBox = document.getElementById('msg');
+
+            fetch('/verify_otp', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({otp: otp})
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    msgBox.className = "success-msg";
+                    msgBox.innerText = "Authentication Valid. Routing...";
+                    setTimeout(() => { window.location.href = "/dashboard"; }, 1200);
+                } else {
+                    msgBox.innerText = "❌ Security Override Denied.";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

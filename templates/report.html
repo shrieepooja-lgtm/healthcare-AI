@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI MediCare | Report Scanner</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; }
+        body { background-color: #050914; min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow-x: hidden; color: white; padding: 40px 20px; }
+        .orb { position: fixed; border-radius: 50%; filter: blur(120px); opacity: 0.5; animation: floatOrb 15s infinite alternate ease-in-out; z-index: 0; }
+        .orb-1 { width: 500px; height: 500px; background: #9b59b6; top: -15%; left: -5%; } /* Purple tint for variety */
+        .orb-2 { width: 600px; height: 600px; background: #00f2fe; bottom: -20%; right: -10%; animation-delay: -5s; }
+        @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(60px, 60px) scale(1.2); } }
+        
+        .container { position: relative; z-index: 10; background: rgba(10, 15, 30, 0.6); backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.1); border-top: 2px solid #9b59b6; padding: 40px; width: 100%; max-width: 600px; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes slideIn { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
+        
+        h2 { text-align: center; font-size: 24px; margin-bottom: 5px; text-shadow: 0 0 10px rgba(155,89,182,0.5); }
+        .subtitle { text-align: center; color: #8fa0b5; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px; }
+        
+        .file-upload-wrapper { border: 2px dashed rgba(255,255,255,0.2); padding: 40px 20px; text-align: center; border-radius: 12px; margin-bottom: 25px; transition: 0.3s; background: rgba(255,255,255,0.02); }
+        .file-upload-wrapper:hover { border-color: #9b59b6; background: rgba(155,89,182,0.1); }
+        .file-upload-wrapper input[type="file"] { display: block; margin: 0 auto; color: #8fa0b5; }
+        
+        button { width: 100%; padding: 15px; background: transparent; border: 2px solid #9b59b6; color: #9b59b6; font-size: 16px; font-weight: 700; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.4s; position: relative; overflow: hidden; z-index: 1; }
+        button::before { content: ''; position: absolute; top: 0; left: 0; width: 0%; height: 100%; background: linear-gradient(90deg, #9b59b6, #8e44ad); transition: 0.4s ease; z-index: -1; }
+        button:hover::before { width: 100%; }
+        button:hover { color: white; box-shadow: 0 0 20px rgba(155, 89, 182, 0.6); transform: translateY(-2px); }
+        
+        .result-box { margin-top: 30px; padding: 20px; background: rgba(46, 213, 115, 0.1); border: 1px solid #2ed573; border-radius: 12px; text-align: center; animation: pulseGlow 2s infinite; }
+        @keyframes pulseGlow { 0% { box-shadow: 0 0 5px rgba(46, 213, 115, 0.2); } 50% { box-shadow: 0 0 20px rgba(46, 213, 115, 0.5); } 100% { box-shadow: 0 0 5px rgba(46, 213, 115, 0.2); } }
+        .result-box h3 { color: #2ed573; margin-bottom: 10px; font-size: 22px; }
+        .result-box p { color: #d1d8e0; font-size: 14px; margin-bottom: 5px; }
+        .result-box span { color: white; font-weight: bold; }
+        
+        .back-link { display: block; text-align: center; margin-top: 25px; color: #8fa0b5; text-decoration: none; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .back-link:hover { color: #9b59b6; text-shadow: 0 0 10px rgba(155,89,182,0.5); }
+    </style>
+</head>
+<body>
+    <div class="orb orb-1"></div><div class="orb orb-2"></div>
+    <div class="container">
+        <h2>Medical Document NLP</h2>
+        <p class="subtitle">PDF Extraction & Analysis</p>
+        
+        <form method="POST" enctype="multipart/form-data">
+            <div class="file-upload-wrapper">
+                <p style="margin-bottom: 15px; color: #00f2fe; font-size: 40px;">📄</p>
+                <input type="file" name="file" accept=".pdf" required>
+            </div>
+            <button type="submit">Extract Data & Analyze</button>
+        </form>
+
+        {% if result %}
+        <div class="result-box">
+            <h3>⚠ AI Detection: {{ result.disease }}</h3>
+            <p>Source Document: <span>{{ result.filename }}</span></p>
+            <p>Recommended Lab Test: <span style="color:#00f2fe;">{{ result.test }}</span></p>
+            <p>Required Specialist: <span style="color:#00f2fe;">{{ result.doctor }}</span></p>
+        </div>
+        {% endif %}
+
+        <a href="/dashboard" class="back-link">← Return to Command Center</a>
+    </div>
+</body>
+</html>
